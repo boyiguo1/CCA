@@ -1,12 +1,3 @@
----
-title: "Data Cleaning"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ### Terms Related to Data Clearning
 
 * **Data cleaning**: Process of detecting, diagnosing, and editing faulty data
