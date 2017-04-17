@@ -1,0 +1,28 @@
+# CLICK: Clustering Identification via Connectivity Kernels
+
+### The Contribution
+The authors developed a novel clustering algorithm that does not make any prior assumptions on the number or the structure of the clusters.
+
+### Assumptions
+Probabilistic assumption: Similarity values between mates are normally distributed with mean $\mu_T$ and variance $\sigma^2_T$; similarity values between non-mates are normally distributed with mean$\mu_F$ and variance $\sigma^2_F$, where $\mu_T > \mu_F$. (Mates means two elements belongs to the dame cluster.)
+
+### Limitations
+Requires a lot of computational power
+
+### Steps
+1. Construct similarity matrix from fingerprint data with certain Similarity Measure
+2. Estimate the distribution parameters $\mu_T, \mu_F, \sigma_T$ and $\sigma_F$ and the probability $p_{mates}$ that two randomly chosen elements are mates
+    * With (biological) prior information, estimate parameters
+    * Without prior information, EM algorithm ([Mirkin 1996](https://link.springer.com/chapter/10.1007/978-3-642-72087-1_20))
+3. Construct weighted similarity graph by deriving the weight $w_ij$ of an edge $(i,j)$ from the similarity value
+$$w_{ij} = log\frac{p_{mates}\sigma_F}{(1-p_{mates})\sigma_T} + \frac{(S_{ij}-\mu_F)^2}{2\sigma^2_F} - \frac{(S_{ij}-\mu_T)^2}{2\sigma^2_T}$$
+4. Recursively partition the weighted graph into a set of singletons and a set of kernels by a minimum weight cut function.
+      * Exhaustively find a cut $C$ for which the probability ratio $Pr(H_1^C|C)/Pr(H_0^C|C)$ is minimum
+      * Special case for the incomplete graph
+5. Expanding: Adopt all the singletons produced before, update weighted graph for remaining singletons, until nothing changes; merge kernels; adopt remaining singletons.
+      * Singleton adoption: Kernel takes singleton
+      * Kernel merging: merging two kernels
+
+
+### Acknowledgement
+This is an abstract from the article [Data Cleaning: Detecting, Diagnosing, and Editing Data Abnormalities](http://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020267)
