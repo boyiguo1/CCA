@@ -48,7 +48,6 @@ Calculate the difference between Prediction Error from orifinal random forest an
 The references are great to review the basic or the begining of development of tree/RF.
 The proximity matrix is a very interesting but useless idea.
 
-
 ### Acknowledgement
 This is a abstract from the article [Multivariate Random Forests](https://www.researchgate.net/publication/220080658_Multivariate_random_forests)
 
