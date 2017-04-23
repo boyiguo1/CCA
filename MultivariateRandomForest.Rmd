@@ -1,17 +1,53 @@
----
-title: "Multivariate Random Forests"
-output: github_document
----
-
 # Multivariate Random Forests
+
+## Contribution
+1. Revisit regression tree, random forest
+2. Question the idea of growing each tree in the forest to its maximal depth
 
 ## Development of recursive partitioning methods
 
-## Regression Tree Method
+## Regression Tree
 ### Four components
 1. A set of binary questions phrased  in terms of the predictors that served to partition the predictor space
-2. A node impurity measure, e.g. variance reduction
-3. A split function, $\theta(s,t)$, that can be evaluated for each allowable split. The best split, optimaizes $\theta$
+2. A node impurity measure, e.g. variance
+3. A split function, $\theta(s,t)$, that can be evaluated for each allowable split. The best split optimizes $\theta$. e.g. variance reduction
+
+### Multiple Responses 
+In order to extend regression trees to multiple responses, the author modifies the split function. A natural formulation is to replace the node impurity measure with a 'covariance' weighted analog"
+$$
+SS(t) = \sum\limits_{i\in t}(y_i - \mu(t))'V^{-1}(t,\eta)(y_i - \mu(t)),
+$$
+where $eta$ represents parameters characterizing prescribed covariance structures
+
+## Random Forests
+RF prediction is the unweighted average over a collection of tree predictors.     
+    
+Requirements for accurate RF regression:
+1. low correlation between residuals of differing tree members of the forest
+2. low prediction error for the individual trees.
+
+The strategy to achieve the reqirements:
+1. grow tree to maximal depth
+2. In order to eep residual correlation low, grow each tree on a bootstrap sample from the training data, and force $mtry << p$
+
+However, the idea of growing tree to maximal depth might be wrong due to the behaviour of benmark datasets of `mlbench` package. The datasets shows that the prediction error at the maximal number of splits is the global minimum, which is not universally true.
+
+Meanwhile, if we control `maxnodes` or `nodesize`, we can limit the unstability incurred by growing to maximal depth strategy.
+
+## Multivariate RF
+To construct MRF, the author simply gernerate an ensemble of MRTs via bootstrap resampling and predictors subsampling as for univariate RF. Formulations have been advanced.
+
+## By product
+### Proximity matrix
+Measure the similarity of a pair of samples by assessing if they are in the same terminal nodes normalized by the number of trees.
+
+### Variable Importance
+Calculate the difference between Prediction Error from orifinal random forest and PE from permuted random forest, and then average over all trees.
+
+## Notes
+The references are great to review the basic or the begining of development of tree/RF.
+The proximity matrix is a very interesting but useless idea.
+
 
 ### Acknowledgement
 This is a abstract from the article [Multivariate Random Forests](https://www.researchgate.net/publication/220080658_Multivariate_random_forests)
