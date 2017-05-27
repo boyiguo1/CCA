@@ -1,0 +1,34 @@
+---
+title: "Git Intro"
+output: pdf_document
+---
+# Basic Concepts
+## Version Control Systems
+* Local Version Control Systems: Use a local database to track all the changes to files under version control. e.g. RCS   
+![Local Version Control System Structure](LVC.png)
+* Centralized Version Control Systems: Have a single server that contains all the versioned files, and a number of clients that check out files from that centrol place. e.g. subversion   
+![Centralized Version Control System Structure](CVC.png)
+* Distributed Version Control Systems: Each client fully mirrors the repository. e.g. git   
+![Distributed Version Control Systems Structure](DVC.png)
+* CVCS vs DVCS: DVCS allows working locally, and commit when internet access is available.
+
+## Intro to Git
+* Snapshots, Not Differences
+* Nearly Every Operation Is Local
+* Git Has Integrity: Uses checksum
+* Git Generally Only Adds Data
+* The Three States
+    + Commited
+    + Modified
+    + Staged
+    
+# Git commands
+* .gitignore file
+* git diff [--staged]
+* git commit -a(automatically stage every file that is already tracked)
+* git log and all their optioins
+* git remote [-v]
+* git fetch vs git pull: git fetch will only download the files, but git pull will also merge the differences
+* git tag
+    + lightweight
+    + annotated
